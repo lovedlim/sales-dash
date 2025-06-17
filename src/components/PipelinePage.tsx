@@ -76,6 +76,10 @@ export const PipelinePage: React.FC<PipelinePageProps> = ({
     setSelectedStages([]);
   };
 
+  const stagesToDisplay = selectedStages.length > 0
+    ? stageConfigs.filter(stage => selectedStages.includes(stage.id))
+    : stageConfigs;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* 헤더 */}
@@ -215,7 +219,7 @@ export const PipelinePage: React.FC<PipelinePageProps> = ({
           </div>
           
           <div className="flex space-x-6 overflow-x-auto pb-6">
-            {stageConfigs.map((stage) => (
+            {stagesToDisplay.map((stage) => (
               <StageColumn
                 key={stage.id}
                 stage={stage}
